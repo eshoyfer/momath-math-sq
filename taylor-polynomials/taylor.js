@@ -37,6 +37,8 @@ function f6(x) {return (-(1.0*x**11)/factorials[11]) + ((1.0*x**9)/factorials[9]
 
 var f_list = [f0, f1, f2, f3, f4, f5, f6];
 
+
+
 // e^x
 
 function e0(x) {return Math.E**x;};
@@ -158,6 +160,14 @@ function render(floor: Floor) {
   // for (let i: Sensor.Index|undefined = new Sensor.Index(); i; i = i.incr())
   //   if (input.get(i))
   //     ctx.fillRect(i.x+0.05, i.y+0.05, 0.9, 0.9);
+  var num_users = floor.users.length;
+  ctx.clearRect(0, 0, 576, 576);
+  form_grid(ctx);
+
+  for (var i = 0; i < 7; i++) {
+    plot_function(c_list[i], [- (4*Math.PI), (4*Math.PI)], [-2, 2], ctx, colors[i]);
+
+  };
 }
 
 function init(container: HTMLDivElement) {
@@ -188,7 +198,6 @@ function init(container: HTMLDivElement) {
   text_box.style.fontSize = "small";
   var content = document.createTextNode("Terms: N");
   text_box.appendChild(content);
-
   console.log("yeah we executed here");
 };
 
@@ -197,7 +206,7 @@ function init(container: HTMLDivElement) {
 export const behavior: Behavior = {
   title: "Sensor Debug (Canvas2D)",
   frameRate: 'sensors',
-  maxUsers: 0,
+  maxUsers: 7,
   init: init,
   render: render
 };
