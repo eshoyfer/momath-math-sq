@@ -10,12 +10,16 @@ The floor is made up of 81 (9x9) identical squares, each with a 64x64 LED displa
 
 The challenge of the game is for players to move around the floor so that the line of best fit aligns with a target regression line. 
 Once this is matched, a new target is made.
-It teaches players how data coordinates affects the regression line which is not only dependant on the players position but also the number of users. The more players on the floor, it will require more collaboration to win the game. 
+It teaches players how data coordinates affects the regression line which is not only dependant on the players position but also the number of users. The more players, the more collaboration required to win the game. 
 
-## Install
+## About Linear Regression
+
+Linear Regression is one of the most basic and widely used type of predictive analysis.
+These regression estimates are used to explain the relationship between one dependent varible and one or more independent varible. 
 
 
-### Installation
+## Installation
+
 Follow the instruction on https://github.com/momath/math-square. 
 Place js file inside the /behs folder. 
 
