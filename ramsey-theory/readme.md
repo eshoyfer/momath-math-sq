@@ -1,5 +1,5 @@
 ## Ramsey Theory Demonstration 
-#### `ramsey-theory/ramsey-theory.js`
+#### `ramsey-theory/ramsey_theory.js`
 
 ### Introduction
 
@@ -7,7 +7,7 @@ The demonstration contained is intended to present a simple to understand yet de
 
 ### Demonstration
 
-The `behs` files `ramsey-theory.js` is located in the `ramsey-theory` directory and is created for the MoMath math square exhibit. It is intended for 3-6 people. The natural abstraction of the above problem is to consider people as vertices, and relationships between them as edges. If an edge is blue, the people are strangers. If an edge is red, the people are friends. Thus the situation is fully described by a complete graph on n vertices, K_n. The question we asked was whether an arbitrary two-coloring of the edges always yields some triangle that is only one color. As we mentioned, the case is only yes once we reach n=6. 
+The `behs` files `ramsey_theory.js` is located in the `ramsey-theory` directory and is created for the MoMath math square exhibit. It is intended for 3-6 people. The natural abstraction of the above problem is to consider people as vertices, and relationships between them as edges. If an edge is blue, the people are strangers. If an edge is red, the people are friends. Thus the situation is fully described by a complete graph on n vertices, K_n. The question we asked was whether an arbitrary two-coloring of the edges always yields some triangle that is only one color. As we mentioned, the case is only yes once we reach n=6. 
 
 When 3-5 people are on the board, a counterexample to the problem for that many people is displayed. Once 6 people appear on the board, an arbitrary two coloring of the graph is provided, and a triangle colored by a single color is highlighted. We hope this demonstrates the problem and incites the participant to think about the solution.
 
