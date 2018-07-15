@@ -1,12 +1,10 @@
-# MoMath _Math Square_ Linear Regression Game
 
-### Overview
+### Linear Regression Game
+
+*File Location: Linear-Regression/regression-TEST.js*
 
 This Linear Regression game is made for the _Math Square_ at MoMath NYC. 
 https://github.com/momath/math-square
-
-The _Math Square_ is a walkable floor with a full-color 576x576 pixel display, overlaid with a 72x72 binary (on-off) sensor grid.
-The floor is made up of 81 (9x9) identical squares, each with a 64x64 LED display and 8x8 touch sensors.
 
 The challenge of the game is for players to move around the floor so that the line of best fit aligns with a target regression line. 
 Once this is matched, a new target is made.
@@ -14,14 +12,19 @@ It teaches players how data coordinates affects the regression line which is not
 
 #### About Linear Regression
 
-Linear Regression is one of the most basic and widely used type of predictive analysis. It is used to explain the relationship between one dependent varible and one or more independent varible. 
+Linear Regression is one of the most basic and widely used type of predictive analysis. Used to explain the relationship between one dependent varible and one or more independent varible, its use impact our daily lifes. 
+This interactive visualization is therefore beneficial for young museum vistors to understand the concept at an early age. 
 
+#### Exhibit Features
+
+* No limit of players-- the more players, the more interactive.
+* Player have to work together to win.
+* Effectively show the concepts of regressions such as how extreme outliers can affect the regression, weighted towards clusters of players etc..
 
 #### Installation
 
 Follow the instruction on https://github.com/momath/math-square. 
 Place js file inside the /behs folder. 
-
 
 #### Development
 
