@@ -22,6 +22,51 @@ var FWIDTH = 576;
 var FHEIGHT = 576;
 
 var factorials = [1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800, 39916800, 479001600];
+var colors = ["white", "red", "pink", "green", "blue", "brown", "green", "purple"];
+
+// Functions and their Taylor Polynomials Definition
+
+// Sin(x)
+function f0(x) {return Math.sin(x);};
+function f1(x) {return x;};
+function f2(x) {return -(1.0*x*x*x)/6.0 + x;};
+function f3(x) {return ((x**5)/120)-(1.0*x*x*x)/6.0 + x;};
+function f4(x) {return (-(1.0*x**7)/factorials[7]) + ((x**5)/120)-(1.0*x*x*x)/6.0 + x);};
+function f5(x) {return ((1.0*x**9)/factorials[9]) + (-(1.0*x**7)/factorials[7]) + ((x**5)/120)-(1.0*x*x*x)/6.0 + x;};
+function f6(x) {return (-(1.0*x**11)/factorials[11]) + ((1.0*x**9)/factorials[9]) + (-(1.0*x**7)/factorials[7]) + ((x**5)/120)-(1.0*x*x*x)/6.0 + x;};
+
+var f_list = [f0, f1, f2, f3, f4, f5, f6];
+
+// e^x
+
+function e0(x) {return Math.E**x;};
+function e1(x) {return 1;};
+function e2(x) {return 1 + x;};
+function e3(x) {return 1 + x + (x**2)/2.0;};
+function e4(x) {return 1 + x + (x**2)/2.0 + (x**3)/6.0;};
+function e5(x) {return 1 + x + (x**2)/2.0 + (x**3)/6.0 + (x**4)/24.0;};
+function e6(x) {return 1 + x + (x**2)/2.0 + (x**3)/6.0 + (x**4)/24.0 + (x**5)/120.0;};
+function e7(x) {return 1 + x + (x**2)/2.0 + (x**3)/6.0 + (x**4)/24.0 + (x**5)/120.0 + (x**6)/720.0;};
+
+var e_list = [e0, e1, e2, e3, e4, e5, e6, e7];
+
+// cos(x)
+
+function c0(x) {return Math.cos(x);};
+function c1(x) {return 1;};
+function c2(x) {return 1 - (x**2)/2.0;};
+function c3(x) {return 1 - (x**2)/2.0 + (x**4)/24.0;};
+function c4(x) {return 1 - (x**2)/2.0 + (x**4)/24.0 - (x**6)/720.0;};
+function c5(x) {return 1 - (x**2)/2.0 + (x**4)/24.0 - (x**6)/720.0 + (x**8)/(factorials[8]);};
+function c6(x) {return 1 - (x**2)/2.0 + (x**4)/24.0 - (x**6)/720.0 + (x**8)/(factorials[8]) - (x**10)/(factorials[10]);};
+
+var c_list = [c0, c1, c2, c3, c4, c5, c6];
+
+
+
+
+
+
 // xcoords is [Xmin, Xmax]
 // ycoords is [Ymin, Ymax]
 // Output a list of coords to plot
@@ -95,6 +140,15 @@ function plot_function(func, xcoords, ycoords, ctx, color) {
   plot_coords_list(coords, ctx, color);
 }
 
+//
+// plot_function(c0, [- (4*Math.PI), (4*Math.PI)], [-2,2], ctx, "white");
+// plot_function(c1, [- (4*Math.PI), (4*Math.PI)], [-2, 2], ctx, "red");
+// plot_function(c2, [- (4*Math.PI), (4*Math.PI)], [-2, 2], ctx, "pink");
+// plot_function(c3, [- (4*Math.PI), (4*Math.PI)], [-2, 2], ctx, "green");
+// plot_function(c4, [- (4*Math.PI), (4*Math.PI)], [-2, 2], ctx, "blue");
+// plot_function(c5, [- (4*Math.PI), (4*Math.PI)], [-2, 2], ctx, "brown");
+// plot_function(c6, [- (4*Math.PI), (4*Math.PI)], [-2, 2], ctx, "green");
+
 function render(floor: Floor) {
   // var input = floor.sensors;
   // /* clear canvas */
@@ -121,19 +175,22 @@ function init(container: HTMLDivElement) {
   // ctx.lineTo(70,100);
   // ctx.strokeStyle="red";
   // ctx.stroke();
+
   console.log("fucking stroke");
   form_grid(ctx);
-  plot_function((function(x) {return Math.sin(x);}), [- (4*Math.PI), (4*Math.PI)], [-2,2], ctx, "white");
-  plot_function((function(x) {return x; console.log("hi");}), [- (4*Math.PI), (2*Math.PI)], [-2, 2], ctx, "red");
-  plot_function((function(x) {return -(1.0*x*x*x)/6.0 + x; console.log("hi");}), [- (4*Math.PI), (4*Math.PI)], [-2, 2], ctx, "blue");
-  plot_function((function(x) {return ((x**5)/120)-(1.0*x*x*x)/6.0 + x; console.log("hi");}), [- (4*Math.PI), (4*Math.PI)], [-2, 2], ctx, "green");
-  plot_function((function(x) {return (-(1.0*x**7)/factorials[7]) + ((x**5)/120)-(1.0*x*x*x)/6.0 + x; console.log("hi");}), [- (4*Math.PI), (4*Math.PI)], [-2, 2], ctx, "purple");
-  plot_function((function(x) {return ((1.0*x**9)/factorials[9]) + (-(1.0*x**7)/factorials[7]) + ((x**5)/120)-(1.0*x*x*x)/6.0 + x; console.log("hi");}), [- (4*Math.PI), (4*Math.PI)], [-2, 2], ctx, "pink");
-  plot_function((function(x) {return (-(1.0*x**11)/factorials[11]) + ((1.0*x**9)/factorials[9]) + (-(1.0*x**7)/factorials[7]) + ((x**5)/120)-(1.0*x*x*x)/6.0 + x; console.log("hi");}), [- (4*Math.PI), (4*Math.PI)], [-2, 2], ctx, "brown");
 
+  var text_box = document.createElement("div");
+  document.getElementById('scene').appendChild(text_box);
+  text_box.style.position = 'absolute'
+  text_box.style.top = "20px";
+  text_box.style.backgroundColor = "Black";
+  text_box.style.color = "White";
+  text_box.style.fontSize = "small";
+  var content = document.createTextNode("Terms: N");
+  text_box.appendChild(content);
 
   console.log("yeah we executed here");
-}
+};
 
 
 
