@@ -151,6 +151,9 @@ function plot_function(func, xcoords, ycoords, ctx, color) {
 // plot_function(c5, [- (4*Math.PI), (4*Math.PI)], [-2, 2], ctx, "brown");
 // plot_function(c6, [- (4*Math.PI), (4*Math.PI)], [-2, 2], ctx, "green");
 
+var selection;
+var chosen_func;
+
 function render(floor: Floor) {
   // var input = floor.sensors;
   // /* clear canvas */
@@ -164,8 +167,9 @@ function render(floor: Floor) {
   ctx.clearRect(0, 0, 576, 576);
   form_grid(ctx);
 
-  for (var i = 0; i < 7; i++) {
-    plot_function(c_list[i], [- (4*Math.PI), (4*Math.PI)], [-2, 2], ctx, colors[i]);
+  for (var i = 0; i < num_users; i++) {
+    plot_function(chosen_func[i], [- (4*Math.PI), (4*Math.PI)], [-2, 2], ctx, colors[i]);
+    document.getElementById("box").innerHTML = "Taylor Polynomial Terms: " + i;
 
   };
 }
@@ -189,6 +193,15 @@ function init(container: HTMLDivElement) {
   console.log("fucking stroke");
   form_grid(ctx);
 
+  selection = Math.floor(Math.random() * 3 + 1;
+  if (selection == 1) {
+    chosen_func = c_list;
+  } else if (selection == 2) {
+    chosen_func = e_list;
+  } else {
+    chosen_func = f_list;
+  }
+
   var text_box = document.createElement("div");
   document.getElementById('scene').appendChild(text_box);
   text_box.style.position = 'absolute'
@@ -196,8 +209,8 @@ function init(container: HTMLDivElement) {
   text_box.style.backgroundColor = "Black";
   text_box.style.color = "White";
   text_box.style.fontSize = "small";
-  var content = document.createTextNode("Terms: N");
-  text_box.appendChild(content);
+  text_box.id = "box";
+  text_box.innerHTML = "Taylor Polynomial Terms: 0";
   console.log("yeah we executed here");
 };
 
