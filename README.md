@@ -1,7 +1,7 @@
 # momath-math-sq
 MoMath Hackathon 2018 - Math Square
 
-### Taylor Polynomial Interactive Visualization
+## Taylor Polynomial Interactive Visualization
 
 *File Location: taylor.js*
 
@@ -25,7 +25,7 @@ Finite Taylor polynomials, consisting of the first *n* terms of a Taylor series,
 * Interactive & collaborative: passers-by join in on the fun! Build the best possible approximation
 * Helps the audience develop intuition for the nature of the Taylor series
 
-### Linear Regression Game
+## Linear Regression Game
 
 *File Location: Linear-Regression/regression-TEST.js*
 
