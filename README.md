@@ -3,6 +3,7 @@
 
 Learn more about the MoMath *Math Square*: http://moeyinc.com/math-square/.
 From their website:
+
 *Math Square is an interactive installation that includes a series of different math games users play by stepping across the floor. This playful interface introduces complex math concepts such as fractals, mazes and the Voronoi algorhytm in an engaging manner. Moey built and designed Math Square in collaboration with the team at MoMath.*
 
 ## Taylor Polynomial Interactive Visualization
