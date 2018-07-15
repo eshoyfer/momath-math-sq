@@ -1,14 +1,3 @@
-/* MoMath Math Square Behavior
- *
- *        Title: Maximal Graph
- *  Description: Displays maximal graph with each user as a node
- * Scheduler ID:
- *    Framework: P5
- *       Author: Allen He <he@momath.org>
- *      Created: 2017-05-23
- *       Status: works
- */
-
 import P5Behavior from 'p5beh';
 
 const pb = new P5Behavior();
@@ -22,19 +11,29 @@ var listOfPairs = [];
 
 pb.draw = function (floor, p) {  
     this.clear();
-    //console.log(floor.users.length);
     var numUsers = floor.users.length;
     if(numUsers == 0 || numUsers == 1 || numUsers == 2){
 	var s = 'Have at least 3 people step on the square! How many are required such that any coloring of the triangles has a triangle with only 1 color?';
 	this.fill(100);
 	this.text(s, 278, 278, 100, 100);
     }
+    /*
+      Main loop is here, demonstrates the friends and strangers theorem on K_6, the
+      complete graph on 6 vertices. A random 2-coloring of the edges will result in a
+      at least one triangle of one color.
+    */
     if(numUsers == 6){
+	/*
+	  Run this loop every 40 frames as to slow down how quickly colorings
+	  change without slowing down user's framerate.
+	*/
     if (frameNum % 40 == 0) {
 	for (let u1 of floor.users){
             for (let u2 of floor.users){
+		//Color edges at random
 		var rand_color = Math.random();    
 		if (rand_color > 0.5){
+		    //Push new edge defined by 2 users as endpoints to list of edges.
                     listOfPairs.push({user1: u1, user2: u2, color: red});
 		}
 		else{
@@ -42,7 +41,11 @@ pb.draw = function (floor, p) {
 		}
 		
             }
-	} 
+	}
+	/*
+          We only keep the last 36 edges which enumerate (with repetition, when not
+          considering vertex order) of K_6. These are the newest
+        */
 	if(listOfPairs.length > 36){
 	    var newPairs = listOfPairs.slice(36, 72);
 	    listOfPairs = newPairs;
@@ -52,19 +55,15 @@ pb.draw = function (floor, p) {
 
     var tris = getAllTriangles();
 
-    //console.log("Num of all tris: " tris.length);
-    
-    //for(var i = 0; i < listOfPairs.length; i++){
-    //   var obj = listOfPairs[i];
-    //   //console.log(obj["user1"]);
-    //   //console.log(obj["user2"]);
-    //   console.log(obj["color"]);
-    // }
-
+	/*
+	  The next few lines find some triangle in K_6 which is of one color.
+	  This exists by the friends and strangers theorem.
+	  Note we only ever loop over at most 20 distinct triangles in K_6, since
+	  6 choose 3 = 20. These are enumerated in the gT (get Triangles) method.
+	*/
     var someUnicolorTri = undefined;
     for(var i = 0; i <= tris.length; i++){
 	if(triangleUnicolor(tris[i])){
-	    //console.log("UNICOLOR TRIANGLE");
 	    someUnicolorTri = tris[i];
 	    break;
 	}
@@ -79,21 +78,17 @@ pb.draw = function (floor, p) {
 	var color = pair["color"];
 	this.stroke(color);
 	this.line(u1.x, u1.y, u2.x, u2.y);
-	//if(someUnicolorTri.includes(pair)){
-	  //  this.strokeWeight(10);
-	  //  this.line(u1.x, u1.y, u2.x, u2.y);
-	//}
 	if(numUsers == 6){
 	    pb.drawUser(u1);
 	}
-	var s = '6 people is enough to force a triangle to be of one color! This could be interpreted as saying that 3 of you are all strangers, or 3 of you are all friends! Check our Ramsey theory for similar results.';
-	this.fill(100);
+	var s = '6 people are enough to force some triangle to be of only one color! This could be interpreted as saying that there exist 3 of you who are all strangers, or 3 of you who are all friends! Check out Ramsey theory for similar results.';
+	this.fill(255);
+	this.textSize(17);
+	this.text(s, 85, 450, 450, 180);
 	this.strokeWeight(1);
-	this.text(s, 370, 370, 180, 180);
     }
 
-    
-    //this.stroke("#ffff00");
+
     this.strokeWeight(7);
     var tri = someUnicolorTri;
     var a = tri[0];
@@ -114,7 +109,7 @@ pb.draw = function (floor, p) {
     this.line(c1.x, c1.y, c2.x, c2.y);
    
     }else if (numUsers == 3){
-	//console.log(listOfPairs.length % 3);
+	//Counterexample for n=3.
 	this.stroke(red);
 	this.strokeWeight(4);
 	this.line(50,50, 100, 100);	
@@ -126,7 +121,7 @@ pb.draw = function (floor, p) {
 	this.stroke(1);
 	this.text(s, 250, 250, 70, 80);
     }else if (numUsers == 4){
-	//console.log(listOfPairs.length % 3);
+	//Counterexample for n=4.
 	this.stroke(blue);
 	this.strokeWeight(4);
 	this.line(50,50, 50, 200);	
@@ -145,7 +140,7 @@ pb.draw = function (floor, p) {
 	this.text(s, 250, 250, 70, 80);
     }
     else if (numUsers == 5){
-	//console.log(listOfPairs.length % 3);
+	//Counterexample for n=4.
 	this.stroke(red);
 	this.strokeWeight(4);
 	this.line(50,50, 50, 200);	
@@ -181,6 +176,8 @@ function gT(a, b, c){
     return [listOfPairs[a], listOfPairs[b], listOfPairs[c]];
 }
 
+
+//Return a list of all triangles
 function getAllTriangles(){
     //tL is short for triangleList
     var tL = [];
@@ -218,12 +215,13 @@ function triangleUnicolor(tri){
 
 
 export const behavior = {
-    title: "Maximal Graph (P5)",
+    title: "Ramsey Theory--R(3,3)=6",
     init: pb.init.bind(pb),
     frameRate: 'sensors',
     render: pb.render.bind(pb),
-    numGhosts: 6;
-    maxUsers: 6;
-    ghostRate: 0.001;
+    numGhosts: 6,
+    maxUsers: 6,
+    ghostRate: 0.001,
+    ghostBounds: {x: 2, y: 2, width: 575, height: 450}
 };
 export default behavior
